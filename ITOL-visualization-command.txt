@@ -1,0 +1,21 @@
+## Scheme 1. Classification and abundance scheme of outer ring colors and shapes
+# annotation.txt OTU corresponding species annotation and the average abundance and total abundance information in each group.
+#-a If the input column cannot be found, the operation will be terminated (default: no execution) -c Converts integer columns to factors or numbers with decimal points -t Converts the ID column when the prompt label is deviated -w Color bands, area width, etc. -D Output directory -i OTU column name -l OTU display name such as species/genus/tribe name
+Rscript ./table2itol.R -a -c double -D style1 -i OTUID -l Genus -t %s -w 0.5 ../annot
+ation.txt
+#Generate the comment files such that each column becomes a separate file.
+
+
+## Solution 2. Generate abundance bar chart annotation file
+Rscript ./table2itol.R -a -d -c none -D style2 -b Phylum -i OTUID -l Genus -t %s -w
+0.5 ../annotation.txt
+
+## Solution 3. Generate heatmap annotation file
+Rscript ./table2itol.R -c keep -D style3 -i OTUID -t %s ../otutab.txt
+
+## Solution 4. Convert integers into factors to generate an annotation file
+Rscript ./table2itol.R -a -c factor -D style4 -i OTUID -l Genus -t %s -w 0 ../annotation.txt
+
+## Option 5. Custom Colors
+Rscript table2itol/table2itol.R -a -C table2itol/tests/INPUT/colours_1.yml -c double -D style5 \
+  -i OTUID -l Genus -t %s -w 0.5 ../annotation.txt
